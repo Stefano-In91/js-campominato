@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campo Minato</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <!-- Logo + Titolo -->
+        <div class="flex">
+          <img src="img/logo.png" alt="logo" />
+          <h1>Campo Minato</h1>
+        </div>
+        <!-- /Logo + Titolo -->
+        <!-- Generator Form -->
+        <div class="flex">
+          <form id="generator">
+            <select name="difficulty" id="difficulty">
+              <option value="easy">Facile</option>
+              <option value="normal">Normale</option>
+              <option value="hard">Difficile</option>
+            </select>
+            <button id="generate-btn" type="submit">Genera</button>
+          </form>
+        </div>
+        <!-- /Generator Form -->
+      </div>
+    </header>
+    <!-- /Header -->
+    <!-- Main -->
+    <main>
+      <!-- Board delle celle -->
+      <div id="board"></div>
+      <!-- /Board delle celle -->
+    </main>
+    <!-- /Main -->
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>Made with ❤️ by Boolean</p>
+      </div>
+    </footer>
+    <!-- /Footer -->
+    <script src="js/app.js"></script>
+  </body>
+</html>

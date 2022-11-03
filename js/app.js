@@ -15,32 +15,35 @@ function generateBombs(array, number) {
   return array;
 }
 // Funzione per generare le celle a seconda di difficoltà e coefficiente
-function generateField(string, number, status, counter) {
-  // Localizzazione container celle
-  const boardContainer = document.getElementById("board");
-  boardContainer.innerHTML = "";
+function generateField(container, difficulty, coefficient, status, counter) {
+  container.innerHTML = "";
   // Inizializzazione bombe
   const bombs = [];
-  generateBombs(bombs, number);
-  for (let i = 1; i <= number; i++) {
+  generateBombs(bombs, coefficient);
+  for (let i = 1; i <= coefficient; i++) {
     const cell = document.createElement("div");
     cell.innerHTML = i;
-    cell.classList.add(`board-number-${string}`);
+    cell.classList.add(`board-number-${difficulty}`);
     cell.addEventListener("click", function () {
       if (bombs.includes(i)) {
         const bombed = document.querySelectorAll(`[class*="board-number"]`);
-        for (let x = 0; x < bombs.length; x++) {
-          bombed[bombs[x] - 1].classList.add("boom");
-        }
+        // for (let x = 0; x < bombs.length; x++) {
+        //   bombed[bombs[x] - 1].classList.add("boom");
+        // }
+        bombs.forEach((element) => {
+          bombed[element - 1].classList.add("boom");
+        });
         status.innerHTML = `Hai perso dopo ${counter} Caselle corrette`;
       } else if (!this.classList.contains("clicked")) {
         this.classList.add("clicked");
         status.innerHTML = `Scoperte ${++counter} Caselle corrette`;
       }
     });
-    boardContainer.append(cell);
+    container.append(cell);
   }
 }
+// Localizzazione container celle
+const boardContainer = document.getElementById("board");
 // Localizzazione stato gioco, inizializzazione counter
 const gameStatus = document.getElementById("game-status");
 let clickCounter = 0;
@@ -49,15 +52,21 @@ const generator = document.getElementById("generator");
 // Event listener su submit
 generator.addEventListener("submit", function (event) {
   event.preventDefault();
-  const difficulty = document.getElementById("difficulty").value;
-  let coefficient;
-  if (difficulty === "hard") {
-    coefficient = 100;
-  } else if (difficulty === "normal") {
-    coefficient = 81;
-  } else if (difficulty === "easy") {
-    coefficient = 49;
+  const chosenDifficulty = document.getElementById("difficulty").value;
+  let difficultyCoefficient;
+  if (chosenDifficulty === "hard") {
+    difficultyCoefficient = 100;
+  } else if (chosenDifficulty === "normal") {
+    difficultyCoefficient = 81;
+  } else if (chosenDifficulty === "easy") {
+    difficultyCoefficient = 49;
   }
-  generateField(difficulty, coefficient, gameStatus, clickCounter);
+  generateField(
+    boardContainer,
+    chosenDifficulty,
+    difficultyCoefficient,
+    gameStatus,
+    clickCounter
+  );
   gameStatus.innerHTML = `Scoperte ${clickCounter} Caselle corrette`;
 });

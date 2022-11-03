@@ -50,6 +50,7 @@ footer {
   flex-wrap: wrap;
   align-content: flex-start;
   margin: auto;
+  margin-bottom: 4rem;
 }
 #board div {
   display: flex;
@@ -70,6 +71,9 @@ footer {
   height: calc(100% / 7);
 }
 
+#game-status {
+  text-align: center;
+}
 .clicked {
   background-color: darkblue;
   color: white;

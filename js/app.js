@@ -4,9 +4,9 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 // Funzione genera 16bombe in base al coefficiente
-function generateBombs(array, ceiling) {
+function generateBombs(array, wantedNumber, ceiling) {
   let bomb;
-  for (let i = 1; i <= 16; i++) {
+  for (let i = 1; i <= wantedNumber; i++) {
     do {
       bomb = getRandomInt(1, ceiling);
     } while (array.includes(bomb));
@@ -19,11 +19,12 @@ function generateField(container, difficulty, coefficient, status, counter) {
   container.innerHTML = "";
   // Inizializzazione bombe
   const bombs = [];
-  generateBombs(bombs, coefficient);
+  generateBombs(bombs, 16, coefficient);
   for (let i = 1; i <= coefficient; i++) {
     const cell = document.createElement("div");
     cell.innerHTML = i;
     cell.classList.add(`board-number-${difficulty}`);
+
     cell.addEventListener("click", function () {
       if (bombs.includes(i)) {
         const bombed = document.querySelectorAll(`[class*="board-number"]`);
@@ -34,6 +35,7 @@ function generateField(container, difficulty, coefficient, status, counter) {
           bombed[element - 1].classList.add("boom");
         });
         status.innerHTML = `Hai perso dopo ${counter} Caselle corrette`;
+
         setTimeout(function () {
           alert(`Hai perso dopo ${counter} Caselle corrette`);
           alert(`La pagina verrà ricaricata`);
@@ -44,6 +46,7 @@ function generateField(container, difficulty, coefficient, status, counter) {
         status.innerHTML = `Scoperte ${++counter} Caselle corrette`;
       }
     });
+
     container.append(cell);
   }
 }
@@ -57,8 +60,10 @@ const generator = document.getElementById("generator");
 // Event listener su submit
 generator.addEventListener("submit", function (event) {
   event.preventDefault();
+
   const chosenDifficulty = document.getElementById("difficulty").value;
   let difficultyCoefficient;
+
   if (chosenDifficulty === "hard") {
     difficultyCoefficient = 100;
   } else if (chosenDifficulty === "normal") {
@@ -66,6 +71,7 @@ generator.addEventListener("submit", function (event) {
   } else if (chosenDifficulty === "easy") {
     difficultyCoefficient = 49;
   }
+
   generateField(
     boardContainer,
     chosenDifficulty,
@@ -73,5 +79,6 @@ generator.addEventListener("submit", function (event) {
     gameStatus,
     clickCounter
   );
+
   gameStatus.innerHTML = `Scoperte ${clickCounter} Caselle corrette`;
 });

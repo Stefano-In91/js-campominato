@@ -4,11 +4,11 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 // Funzione genera 16bombe in base al coefficiente
-function generateBombs(array, number) {
+function generateBombs(array, ceiling) {
   let bomb;
   for (let i = 1; i <= 16; i++) {
     do {
-      bomb = getRandomInt(1, number);
+      bomb = getRandomInt(1, ceiling);
     } while (array.includes(bomb));
     array.push(bomb);
   }
@@ -34,6 +34,11 @@ function generateField(container, difficulty, coefficient, status, counter) {
           bombed[element - 1].classList.add("boom");
         });
         status.innerHTML = `Hai perso dopo ${counter} Caselle corrette`;
+        setTimeout(function () {
+          alert(`Hai perso dopo ${counter} Caselle corrette`);
+          alert(`La pagina verrà ricaricata`);
+          window.location.reload();
+        }, 0);
       } else if (!this.classList.contains("clicked")) {
         this.classList.add("clicked");
         status.innerHTML = `Scoperte ${++counter} Caselle corrette`;

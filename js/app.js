@@ -6,11 +6,17 @@ function getRandomInt(min, max) {
 // Funzione genera 16bombe in base al coefficiente
 function generateBombs(array, wantedNumber, ceiling) {
   let bomb;
-  for (let i = 1; i <= wantedNumber; i++) {
-    do {
-      bomb = getRandomInt(1, ceiling);
-    } while (array.includes(bomb));
-    array.push(bomb);
+  // for (let i = 0; i < wantedNumber; i++) {
+  //   do {
+  //     bomb = getRandomInt(1, ceiling);
+  //   } while (array.includes(bomb));
+  //   array.push(bomb);
+  // }
+  while (array.length < wantedNumber) {
+    bomb = getRandomInt(1, ceiling);
+    if (!array.includes(bomb)) {
+      array.push(bomb);
+    }
   }
   return array;
 }

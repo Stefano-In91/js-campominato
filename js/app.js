@@ -19,7 +19,9 @@ function generateField(container, difficulty, coefficient, status, counter) {
   container.innerHTML = "";
   // Inizializzazione bombe
   const bombs = [];
-  generateBombs(bombs, 16, coefficient);
+  const wantedBombs = 16;
+  generateBombs(bombs, wantedBombs, coefficient);
+  console.log(bombs);
   for (let i = 1; i <= coefficient; i++) {
     const cell = document.createElement("div");
     cell.innerHTML = i;
@@ -44,6 +46,15 @@ function generateField(container, difficulty, coefficient, status, counter) {
       } else if (!this.classList.contains("clicked")) {
         this.classList.add("clicked");
         status.innerHTML = `Scoperte ${++counter} Caselle corrette`;
+        if (counter === coefficient - wantedBombs) {
+          status.innerHTML = `Scoperte tutte le Caselle corrette!!`;
+
+          setTimeout(function () {
+            alert(`Hai vinto cliccando ${counter} Caselle corrette!!`);
+            alert(`La pagina verrà ricaricata`);
+            window.location.reload();
+          }, 0);
+        }
       }
     });
 

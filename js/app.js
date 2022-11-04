@@ -41,8 +41,8 @@ function generateField(container, difficulty, coefficient, status, counter) {
         // for (let x = 0; x < bombs.length; x++) {
         //   bombed[bombs[x] - 1].classList.add("boom");
         // }
-        bombs.forEach((element) => {
-          bombed[element - 1].classList.add("boom");
+        bombs.forEach((bomb) => {
+          bombed[bomb - 1].classList.add("boom");
         });
         // Messaggio Sconfitta
         status.innerHTML = `Hai perso dopo ${counter} Caselle corrette`;

@@ -36,23 +36,25 @@ function generateField(container, difficulty, coefficient, status, counter) {
         bombs.forEach((element) => {
           bombed[element - 1].classList.add("boom");
         });
-        status.innerHTML = `Hai perso dopo ${counter} Caselle corrette`;
+        status.innerHTML = `Hai perso dopo ${counter} Caselle corrette.`;
 
         setTimeout(function () {
-          alert(`Hai perso dopo ${counter} Caselle corrette`);
-          alert(`La pagina verrà ricaricata`);
-          window.location.reload();
+          alert(`Hai perso dopo ${counter} Caselle corrette.`);
+          alert(`La pagina verrà ricaricata proseguendo.`);
+          container.innerHTML = "";
+          status.innerHTML = "Inizia a Giocare!";
         }, 0);
       } else if (!this.classList.contains("clicked")) {
         this.classList.add("clicked");
-        status.innerHTML = `Scoperte ${++counter} Caselle corrette`;
+        status.innerHTML = `Scoperte ${++counter} Caselle corrette.`;
         if (counter === coefficient - wantedBombs) {
           status.innerHTML = `Scoperte tutte le Caselle corrette!!`;
 
           setTimeout(function () {
             alert(`Hai vinto cliccando ${counter} Caselle corrette!!`);
-            alert(`La pagina verrà ricaricata`);
-            window.location.reload();
+            alert(`La pagina verrà ricaricata proseguendo.`);
+            container.innerHTML = "";
+            status.innerHTML = "Inizia a Giocare!";
           }, 0);
         }
       }
